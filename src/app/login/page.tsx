@@ -27,8 +27,8 @@ export default function LoginPage() {
         setMessage("登入成功！");
         router.push("/accounting"); // 登入成功導入記帳頁面
       }
-    } catch (error: any) {
-      setMessage(error.message);
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : "未知錯誤");
     } finally {
       setLoading(false); // 結束 loading
     }

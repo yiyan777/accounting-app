@@ -16,6 +16,7 @@ import { db, auth } from "@/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
 import { useRouter } from "next/navigation";
+import { Timestamp } from "firebase/firestore";
 
 type RecordItem ={
   id: string;
@@ -23,7 +24,7 @@ type RecordItem ={
   amount: number;
   type: "income" | "expense";
   note: string;
-  createdAt: any;
+  createdAt: Timestamp;
 }
 
 
@@ -96,8 +97,8 @@ export default function AccountingPage() {
       // setMessage("記帳成功！");
       setAmount(0);
       setNote("");
-    } catch (err: any) {
-      setMessage("寫入失敗：" + err.message);
+    } catch (err) {
+      setMessage("寫入失敗：" + (err instanceof Error ? err.message : "未知錯誤"));
     }
   };
 
